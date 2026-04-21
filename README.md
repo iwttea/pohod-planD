@@ -29,15 +29,15 @@ npm run dev # http://localhost:3000
 
 Структура:
 
-├── components/       # Vue компоненты
-│   ├── Layout/       # Шапка, макет
-│   └── Trip/         # Карточки походов
-├── pages/            # Страницы
-│   ├── login.vue     # Вход
-│   ├── register.vue  # Регистрация
-│   ├── my.vue        # Мои походы
-│   └── trips/        # Создание/просмотр
-├── stores/           # Pinia хранилища
-│   └── auth.js       # Авторизация
-├── composables/      # Переиспользуемая логика
-└── middleware/       # Защита маршрутов
+components/        # Vue компоненты
+  Layout/          # Шапка, макет
+  Trip/            # Карточки походов
+pages/             # Страницы
+  login.vue        # Вход
+  register.vue     # Регистрация
+  my.vue           # Мои походы
+  trips/           # Создание/просмотр
+stores/            # Pinia хранилища
+  auth.js          # Авторизация
+composables/       # Переиспользуемая логика
+middleware/        # Защита маршрутов

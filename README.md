@@ -1,75 +1,43 @@
-# Nuxt Minimal Starter
+ПоходПлан
+Фронтенд приложения для организации туристических походов. Учебный проект для практики Nuxt 3 и Vuetify 3.
+Особенности:
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+-Работает без бэкенда (моковые данные)
+-Авторизация с тестовыми аккаунтами
+-Управление состоянием через Pinia
+-Разграничение прав доступа (Middleware)
 
-## Setup
+Стек технологий:
 
-Make sure to install dependencies:
+-Nuxt 3 (Vue 3 Composition API)
+-Vuetify 3
+-Pinia
 
-```bash
-# npm
+Быстрый старт:
+bash
+
 npm install
+npm run dev # http://localhost:3000
 
-# pnpm
-pnpm install
+Тестовый доступ
+Любой пароль для аккаунтов: admin, org, user.
+Функционал и роли
 
-# yarn
-yarn install
+-Пользователь: просмотр и запись в походы, личный кабинет.
+-Организатор: создание новых походов + права пользователя.
+-Администратор: аналогично организатору (базовая реализация).
 
-# bun
-bun install
-```
+Структура:
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+├── components/       # Vue компоненты
+│   ├── Layout/       # Шапка, макет
+│   └── Trip/         # Карточки походов
+├── pages/            # Страницы
+│   ├── login.vue     # Вход
+│   ├── register.vue  # Регистрация
+│   ├── my.vue        # Мои походы
+│   └── trips/        # Создание/просмотр
+├── stores/           # Pinia хранилища
+│   └── auth.js       # Авторизация
+├── composables/      # Переиспользуемая логика
+└── middleware/       # Защита маршрутов

@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import TripCard from '~/components/Trip/TripCard.vue'
+import TripCard from '~/components/trip/TripCard.vue'
 
 const { trips } = useTrips()
 

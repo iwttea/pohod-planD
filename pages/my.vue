@@ -17,7 +17,7 @@
         <TripCard :trip="trip" />
       </v-col>
     </v-row>
-    <v-alert v-else type="info" class="mb-6">
+    <v-alert v-else color="success" variant="tonal" class="mb-6">
       Вы пока не организуете ни одного похода
     </v-alert>
 
@@ -33,14 +33,14 @@
         <TripCard :trip="trip" />
       </v-col>
     </v-row>
-    <v-alert v-else type="info">
+    <v-alert v-else color="success" variant="tonal">
       Вы пока не участвуете ни в одном походе
     </v-alert>
   </div>
 </template>
 
 <script setup>
-import TripCard from '~/components/Trip/TripCard.vue'
+import TripCard from '~/components/trip/TripCard.vue'
 
 const authStore = useAuthStore()
 const { trips } = useTrips()

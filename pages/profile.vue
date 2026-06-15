@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <h1 class="text-h3 mb-6">Профиль пользователя</h1>

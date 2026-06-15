@@ -1,5 +1,6 @@
 <template>
-  <v-card class="mx-auto h-100 d-flex flex-column" hover @click="$router.push(`/trips/${trip.id}`)">
+  <v-card
+    class="trip-card mx-auto h-100 d-flex flex-column animate__animated animate__fadeIn" hover @click="$router.push(`/trips/${trip.id}`)">
     <v-img :src="trip.img || 'https://placehold.co/600x400/EEE/31343C'" height="200" cover>
       <v-chip 
         class="ma-2" 
@@ -73,3 +74,14 @@ const formatDate = (dateStr) => {
   return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })
 }
 </script>
+
+<style>
+.trip-card {
+  transition: all 0.25s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+</style>

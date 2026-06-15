@@ -45,14 +45,7 @@
                 :error-messages="errors.password2"
               ></v-text-field>
 
-              <v-btn
-                type="submit"
-                color="green"
-                block
-                class="mt-3"
-              >
-                Зарегистрироваться
-              </v-btn>
+              <v-btn type="submit"color="green" block class="mt-3">Зарегистрироваться</v-btn>
 
             </v-form>
 

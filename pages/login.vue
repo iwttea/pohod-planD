@@ -13,7 +13,7 @@
 
             <v-alert class="mb-4" color="success" variant="tonal">
               admin / org / user<br>
-              пароль любой
+              пароль: 123
             </v-alert>
 
             <v-form @submit.prevent="doLogin">
@@ -95,7 +95,6 @@ const doLogin = async () => {
 
     if (success) {
 
-      // ВАЖНО: всегда ведём на безопасную страницу
       router.push('/')
 
     } else {

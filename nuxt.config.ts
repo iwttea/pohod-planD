@@ -1,9 +1,12 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-04-11',
   
+
+  
   css: [
     'vuetify/styles',
     '@mdi/font/css/materialdesignicons.css',
+    'animate.css',
     '~/assets/main.css' 
   ],
   
@@ -14,6 +17,7 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
   ],
+  
   
   vite: {
     ssr: {

@@ -5,81 +5,106 @@ export const useAuthStore = defineStore('auth', {
     user: null,
     isAuthenticated: false,
     isAdmin: false,
-    isOrganizer: false
+    isOrganizer: false,
+
+    // MOCK USERS (единый источник данных)
+    users: [
+      {
+        id: 1,
+        fio: 'Админ Админов',
+        login: 'admin',
+        password: '123',
+        email: 'admin@mail.ru',
+        telephon: '+79991112233',
+        role: 'admin'
+      },
+      {
+        id: 2,
+        fio: 'Организатор Организаторов',
+        login: 'org',
+        password: '123',
+        email: 'org@mail.ru',
+        telephon: '+79992223344',
+        role: 'organizer'
+      },
+      {
+        id: 3,
+        fio: 'Пользователь Обычный',
+        login: 'user',
+        password: '123',
+        email: 'user@mail.ru',
+        telephon: '+79993334455',
+        role: 'user'
+      }
+    ]
   }),
-  
+
   actions: {
     login(login, password) {
-      // МОК-данные для тестирования
-      if (login === 'admin') {
-        this.user = { 
-          id: 1, 
-          fio: 'Админ Админов', 
-          login: 'admin',
-          email: 'admin@mail.ru',
-          telephon: '+79991112233',
-          userrole_id: 1,
-          role_name: 'admin'
-        }
-        this.isAdmin = true
-        this.isOrganizer = true
-      } else if (login === 'org') {
-        this.user = { 
-          id: 2, 
-          fio: 'Организатор Организаторов', 
-          login: 'org',
-          email: 'org@mail.ru',
-          telephon: '+79992223344',
-          userrole_id: 2,
-          role_name: 'organizer'
-        }
-        this.isOrganizer = true
-      } else if (login === 'user') {
-        this.user = { 
-          id: 3, 
-          fio: 'Пользователь Обычный', 
-          login: 'user',
-          email: 'user@mail.ru',
-          telephon: '+79993334455',
-          userrole_id: 3,
-          role_name: 'user'
-        }
-      } else {
-        return false
-      }
-      
+      const foundUser = this.users.find(
+        u => u.login === login && u.password === password
+      )
+
+      if (!foundUser) return false
+
+      this.user = foundUser
       this.isAuthenticated = true
+
+      this.isAdmin = foundUser.role === 'admin'
+      this.isOrganizer =
+        foundUser.role === 'organizer' || foundUser.role === 'admin'
+
       if (import.meta.client) {
         localStorage.setItem('user', JSON.stringify(this.user))
       }
+
       return true
     },
-    
+
     logout() {
       this.user = null
       this.isAuthenticated = false
       this.isAdmin = false
       this.isOrganizer = false
+
       if (import.meta.client) {
         localStorage.removeItem('user')
       }
+
       navigateTo('/')
     },
-    
+
     checkAuth() {
       if (import.meta.client) {
-        const savedUser = localStorage.getItem('user')
-        if (savedUser) {
-          try {
-            this.user = JSON.parse(savedUser)
-            this.isAuthenticated = true
-            this.isAdmin = this.user?.role_name === 'admin'
-            this.isOrganizer = this.user?.role_name === 'organizer' || this.user?.role_name === 'admin'
-          } catch (e) {
-            console.error('Ошибка парсинга пользователя:', e)
-          }
+        const saved = localStorage.getItem('user')
+
+        if (saved) {
+          this.user = JSON.parse(saved)
+
+          this.isAuthenticated = true
+          this.isAdmin = this.user.role === 'admin'
+          this.isOrganizer =
+            this.user.role === 'organizer' || this.user.role === 'admin'
         }
       }
+    },
+
+    // ===== ADMIN CRUD USERS =====
+
+    addUser(user) {
+      user.id = Date.now()
+      this.users.push(user)
+    },
+
+    updateUser(updated) {
+      const index = this.users.findIndex(u => u.id === updated.id)
+      if (index !== -1) {
+        this.users[index] = updated
+      }
+    },
+
+    deleteUser(id) {
+      this.users = this.users.filter(u => u.id !== id)
     }
   }
 })
